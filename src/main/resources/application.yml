@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: account-service
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://user:password@localhost:27017/accountdb}
+
+security:
+  oauth2:
+    client:
+      clientId: account-service
+      clientSecret: ${ACCOUNT_SERVICE_PASSWORD}
+      accessTokenUri: http://auth-service:8080/uaa/oauth/token
+      grant-type: client_credentials
+      scope: server
+    resource:
+      user-info-uri: http://auth-service:8080/uaa/users/current
+
+server:
+  servlet:
+    context-path: /accounts
+
+feign:
+  hystrix:
+    enabled: true
+
+auth-service:
+  url: http://auth-service:8080
+
+statistics-service:
+  url: http://statistics-service:8080
+
