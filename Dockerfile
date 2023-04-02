@@ -1,7 +1,7 @@
-FROM java:8-jre
-MAINTAINER Alexander Lukyanchikov <sqshq@sqshq.com>
+FROM registry.access.redhat.com/ubi8/openjdk-8
 
-ADD ./target/account-service.jar /app/
-CMD ["java", "-Xmx200m", "-jar", "/app/account-service.jar"]
+COPY target/*.jar /opt/app.jar
 
-EXPOSE 6000
+CMD java -jar /opt/app.jar
+
+EXPOSE 8080

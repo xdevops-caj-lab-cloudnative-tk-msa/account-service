@@ -51,7 +51,7 @@
 mvn clean install && mvn spring-boot:run
 ```
 
-此时发现报错，因此程序试图从Spring Cloud Config Server拉取应用配置。
+此时发现报错，因为程序试图从Spring Cloud Config Server拉取应用配置。
 
 ## 去除从Spring Cloud Config Server拉取配置
 
@@ -99,6 +99,7 @@ mvn clean install && mvn spring-boot:run
 ## 剩余的Spring Cloud依赖
 
 本服务使用了以下Spring Cloud依赖：
+- spring-cloud-starter-oauth2
 - spring-cloud-starter-openfeign
 - spring-cloud-starter-sleuth
 - spring-cloud-starter-bus-amqp
@@ -109,7 +110,7 @@ mvn clean install && mvn spring-boot:run
 
 ## 在本地运行MongoDB
 
-参见[mongodb](https://github.com/xdevops-caj-lab-cloudnative-tk-msa/mongodb) 来创建MongoDB数据库。
+参见[mongodb](https://github.com/xdevops-caj-lab-cloudnative-tk-msa/mongodb) 来创建MongoDB数据库`accountdb`。
 
 ## 应用配置
 
@@ -173,7 +174,7 @@ feign:
 ```
 
 说明：
-- `spring.application.name`指定了应用名称，用于Spring Cloud Config Server中查找配置文件。
+- `spring.application.name`指定了应用名称
 - `spring.data.mongodb.uri`指定了MongoDB数据库连接字符串，如果没有指定，则使用默认值`mongodb://user:password@localhost:27017/accountdb`。
 - `security.oauth2.client.accessTokenUri`指定了OAuth2认证服务的地址，将auth-service的端口改为默认端口8080
 - 使用默认端口（8080）
