@@ -297,6 +297,10 @@ CMD java -jar /opt/app.jar
 
 EXPOSE 8080
 ```
+先构建应用：
+```bash
+mvn clean install
+```
 
 构建容器镜像：
 
@@ -317,14 +321,9 @@ podman push quay.io/xxx/account-service:latest
 
 在piggymeticrs-config仓库中集中管理多个微服务的Kubernetes YAML。
 
-### 部署MongoDB
-
-TODO 使用Helm部署bitnami/mongodb
-
-### 部署应用
-
-TODO Kubernetes deployment, confimap, secret, service
-
+创建Kubernetes Secret，包括：
+- MONGODB_URI
+- ACCOUNT_SERVICE_PASSWORD (值同auth-service的ACCOUNT_SERVICE_PASSWORD)
 
 ## Troubleshooting
 
@@ -345,7 +344,33 @@ TODO Kubernetes deployment, confimap, secret, service
 		</dependency>
 ```
 
+### 单元测试失败找不到auth-service
 
+在test/resources/application.yml中添加配置：
+
+```yaml
+auth-service:
+  url: http://auth-service:8080
+
+statistics-service:
+  url: http://statistics-service:8080
+```
+
+这个地址在本地测试时是调用不了的，这里只是为了让单元测试通过。
+
+### Hystrix超时错误
+
+在application.yml中添加配置：
+
+```yaml
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+```
 
 
 

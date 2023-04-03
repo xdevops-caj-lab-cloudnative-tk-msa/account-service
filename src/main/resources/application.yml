@@ -30,3 +30,10 @@ auth-service:
 statistics-service:
   url: http://statistics-service:8080
 
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

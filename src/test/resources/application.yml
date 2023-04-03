@@ -3,3 +3,9 @@ spring:
     mongodb:
       database: piggymetrics
       port: 0
+
+auth-service:
+  url: http://auth-service:8080
+
+statistics-service:
+  url: http://statistics-service:8080
